@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   frontend:
-    container_name: frontend
+    container_name: front
     image: node
     volumes:
       - ../frontend/:/src
@@ -34,6 +34,7 @@ services:
     image: mariadb
     volumes:
       - ./data/mariadb/db:/var/lib/mariadb
+      - ./dumpfiles/ESPECIALISTAS:/etc/dumpfiles/ESPECIALISTAS
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: root
