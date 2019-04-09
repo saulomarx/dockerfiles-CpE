@@ -10,6 +10,7 @@ services:
       - 4200
     ports:
       - 4200:4200
+    env_file: frontend.env
     working_dir: /src
     command: npm start
 
@@ -18,9 +19,13 @@ services:
     image: keymetrics/pm2:8-alpine
     volumes:
       - ../backend/:/src
+      - ./environments/etc/backend/:/etc/backend/
+      - ./environments/var/log/backend/:/var/log/backend/
     working_dir: /src
     expose:
       - 9080
+    env_file: backend.env
+    command: pm2-runtime start /etc/backend/ecosystem.config.js
     depends_on:
       - db
 
