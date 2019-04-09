@@ -2,10 +2,10 @@ version: '3.3'
 
 services:
   frontend:
-    container_name: front
+    container_name: frontend
     image: node
     volumes:
-      - ../frontend/:/src
+      - ../frontend-CpE/:/src
     expose:
       - 4200
     ports:
@@ -18,7 +18,7 @@ services:
     container_name: backend
     image: keymetrics/pm2:8-alpine
     volumes:
-      - ../backend/:/src
+      - ../backend-CpE/:/src
       - ./environments/etc/backend/:/etc/backend/
       - ./environments/var/log/backend/:/var/log/backend/
     working_dir: /src
