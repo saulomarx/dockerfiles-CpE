@@ -2,10 +2,9 @@ module.exports = {
   apps: [
     {
       name: 'backend',
-      script: './index.js',
+      script: './bin/www',
       watch: '.',
       autorestart: true,
     },
   ],
 };
-

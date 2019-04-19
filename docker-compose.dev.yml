@@ -24,6 +24,8 @@ services:
     working_dir: /src
     expose:
       - 9080
+    ports:
+      - 9080:9080
     env_file: backend.env
     command: pm2-runtime start /etc/backend/ecosystem.config.js
     depends_on:
