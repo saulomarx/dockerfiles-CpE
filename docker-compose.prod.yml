@@ -27,7 +27,7 @@ services:
     ports:
       - 9080:9080
     env_file: backend.prod.env
-    command: pm2-runtime start /etc/backend/ecosystem.config.js
+    command: ash -c "npm i && pm2-runtime start /etc/backend/ecosystem.config.js"
     depends_on:
       - db
 
