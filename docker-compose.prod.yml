@@ -30,7 +30,6 @@ services:
     command: pm2-runtime start /etc/backend/ecosystem.config.js
     depends_on:
       - db
-      - frontend
 
   db:
     container_name: db
@@ -41,5 +40,3 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: root
-    depends_on:
-      - frontend
