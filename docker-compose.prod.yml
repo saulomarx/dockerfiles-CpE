@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  frontend:
+    container_name: frontend
+    image: node
+    volumes:
+      - ../frontend-CpE/:/src
+    expose:
+      - 4200
+    ports:
+      - 4200:4200
+    env_file: frontend.prod.env
+    working_dir: /src
+    command: npm run build
+
+  backend:
+    container_name: backend
+    image: keymetrics/pm2:8-alpine
+    volumes:
+      - ../backend-CpE/:/src
+      - ./environments/etc/backend/:/etc/backend/
+      - ./environments/var/log/backend/:/var/log/backend/
+    working_dir: /src
+    expose:
+      - 9080
+    ports:
+      - 9080:9080
+    env_file: backend.prod.env
+    command: ash -c "npm i && pm2-runtime start /etc/backend/ecosystem.config.js"
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: mariadb
+    volumes:
+      - ./data/mariadb/db:/var/lib/mariadb
+      - ./dumpfiles/ESPECIALISTAS:/etc/dumpfiles/ESPECIALISTAS
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: root
